@@ -13,6 +13,18 @@ provider:
   timeout: 30
   stackName: simple-blog-project-${self:provider.stage}
   deploymentMethod: changesets
+  vpc:
+    securityGroupIds:
+      - ${env:VPC_SECURITY_GROUP}
+    subnetIds:
+      [
+        "${env:VPC_SUBNET_1}",
+        "${env:VPC_SUBNET_2}",
+        "${env:VPC_SUBNET_3}",
+        "${env:VPC_SUBNET_4}",
+        "${env:VPC_SUBNET_5}",
+        "${env:VPC_SUBNET_5}",
+      ]
   environment:
     # APP
     PORT: ${env:PORT}
@@ -24,14 +36,6 @@ provider:
     DB_NAME: ${env:DB_NAME}
     # JWT
     JWT_SECRET: ${env:JWT_SECRET}
-    # VPC
-    VPC_SECURITY_GROUP: ${env:VPC_SECURITY_GROUP}
-    VPC_SUBNET_1: ${env:VPC_SUBNET_1}
-    VPC_SUBNET_2: ${env:VPC_SUBNET_2}
-    VPC_SUBNET_3: ${env:VPC_SUBNET_3}
-    VPC_SUBNET_4: ${env:VPC_SUBNET_4}
-    VPC_SUBNET_5: ${env:VPC_SUBNET_5}
-    VPC_SUBNET_6: ${env:VPC_SUBNET_6}
   httpApi:
     cors: true
     disableDefaultEndpoint: true
