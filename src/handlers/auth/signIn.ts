@@ -10,6 +10,7 @@ import { PasswordService } from "../../services/password";
 import { UserRepo } from "../../repos/user.repo";
 import { AuthService } from "../../services/auth";
 import { UserDto } from "../../dtos/user.dto";
+import { HttpStatusCode } from "axios";
 
 export const handler = MiddlewareService.use(
   [validator(UserDto, "sign-in")],
@@ -32,9 +33,17 @@ export const handler = MiddlewareService.use(
           });
 
           console.log("token", token);
-          return response.success("Login successful!", {
-            token,
-          });
+          // return response.success("Login successful!", {
+          //   token,
+          // });
+
+          return {
+            statusCode: HttpStatusCode.Ok,
+            body: JSON.stringify({
+              message: "Login successful!",
+              data: { token },
+            }),
+          };
         } else {
           return response.error("Invalid email / password!");
         }
