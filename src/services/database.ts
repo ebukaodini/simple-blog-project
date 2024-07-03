@@ -35,8 +35,8 @@ export class DatabaseService {
   static async execute(
     query: mysql.QueryOptions
   ): Promise<Query | QueryResult> {
-    return new Promise((resolve, reject) => {
-      this.connect();
+    return new Promise(async (resolve, reject) => {
+      await this.connect();
       this.pool.getConnection((err, connection) => {
         if (err) {
           reject(err);
@@ -65,6 +65,7 @@ export class DatabaseService {
           connection.release();
         });
       });
+      await this.disconnect();
     });
   }
 
