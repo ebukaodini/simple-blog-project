@@ -67,6 +67,7 @@ export class UserRepo {
 
   static async findOneByEmail(email: User["email"]): Promise<User> {
     try {
+      console.log("findOneByEmail", email);
       return await this.createSchema().then(async () => {
         return await DatabaseService.execute({
           sql: `SELECT * FROM users WHERE email = :email LIMIT 1;`,

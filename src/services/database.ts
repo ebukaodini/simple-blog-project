@@ -18,7 +18,18 @@ export class DatabaseService {
     };
 
     // Create a MySQL connection
-    this.pool = mysql.createPool(dbParams);
+    this.pool = mysql
+      .createPool(dbParams)
+      .on("connection", (connection: mysql.Connection) => {
+        console.log("DB Connected to: " + { connection });
+      })
+      .on("release", (connection: mysql.Connection) => {
+        console.log("Connection released");
+      })
+      .on("error", (connection: mysql.Connection) => {
+        console.error("DB Error: " + { connection });
+        this.pool.end();
+      });
   }
 
   static async execute(

@@ -8,6 +8,7 @@ import { THandler } from "../interfaces/THandler";
 
 export class MiddlewareService {
   static use(middlewares: TMiddleware[], handler: THandler) {
+    console.log("MiddlewareService");
     return (
       event: APIGatewayProxyEvent,
       context: Context,
