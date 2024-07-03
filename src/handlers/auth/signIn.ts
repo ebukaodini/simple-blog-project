@@ -20,7 +20,6 @@ export const handler = MiddlewareService.use(
   ): Promise<APIGatewayProxyResult> => {
     try {
       const data = UserDto.fromJson(JSON.parse(event.body!));
-      console.log("signIn", data);
       const { email, password: uPassword } = data;
 
       return await UserRepo.findOneByEmail(email).then(async (result) => {

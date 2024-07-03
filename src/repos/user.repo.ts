@@ -78,8 +78,6 @@ export class UserRepo {
       });
     } catch (error: any) {
       throw error;
-      // } finally {
-      //   await DatabaseService.disconnect();
     }
   }
 

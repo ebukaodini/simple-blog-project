@@ -21,14 +21,13 @@ export class DatabaseService {
     this.pool = mysql
       .createPool(dbParams)
       .on("connection", (connection: mysql.Connection) => {
-        console.log("DB Connected to: " + { connection });
+        console.log("DB Connected to: " + connection.config.database);
       })
       .on("release", (connection: mysql.Connection) => {
         console.log("Connection released");
       })
       .on("error", (connection: mysql.Connection) => {
         console.error("DB Error: " + { connection });
-        this.pool.end();
       });
   }
 
@@ -37,7 +36,7 @@ export class DatabaseService {
   ): Promise<Query | QueryResult> {
     return new Promise(async (resolve, reject) => {
       await this.connect();
-      this.pool.getConnection((err, connection) => {
+      const poolConnection = this.pool.getConnection((err, connection) => {
         if (err) {
           reject(err);
           return;
@@ -65,14 +64,6 @@ export class DatabaseService {
           connection.release();
         });
       });
-      await this.disconnect();
     });
-  }
-
-  static async disconnect() {
-    // Close the database connection
-    // this.connection.end();
-    this.connection.destroy();
-    console.log("Disconnected from database");
   }
 }
