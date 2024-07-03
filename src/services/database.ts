@@ -71,7 +71,7 @@ export class DatabaseService {
 
   static async disconnect() {
     // Close the database connection
-    this.connection.end();
+    // this.connection.end();
     this.connection.destroy();
     console.log("Disconnected from database");
   }
