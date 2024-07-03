@@ -46,13 +46,6 @@ jobs:
           echo DB_PASSWORD=${{ secrets.DB_PASSWORD }} >> .env
           echo DB_NAME=${{ secrets.DB_NAME }} >> .env
           echo JWT_SECRET=${{ secrets.JWT_SECRET }} >> .env
-        # echo VPC_SECURITY_GROUP=${{ secrets.VPC_SECURITY_GROUP }} >> .env
-        # echo VPC_SUBNET_1=${{ secrets.VPC_SUBNET_1 }} >> .env
-        # echo VPC_SUBNET_2=${{ secrets.VPC_SUBNET_2 }} >> .env
-        # echo VPC_SUBNET_3=${{ secrets.VPC_SUBNET_3 }} >> .env
-        # echo VPC_SUBNET_4=${{ secrets.VPC_SUBNET_4 }} >> .env
-        # echo VPC_SUBNET_5=${{ secrets.VPC_SUBNET_5 }} >> .env
-        # echo VPC_SUBNET_6=${{ secrets.VPC_SUBNET_6 }} >> .env
 
       - name: Serverless deploy
         run: npx sls deploy -s production -r us-east-1 -c serverless.yml

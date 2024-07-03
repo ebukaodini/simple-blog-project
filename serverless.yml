@@ -13,18 +13,6 @@ provider:
   timeout: 30
   stackName: simple-blog-project-${self:provider.stage}
   deploymentMethod: changesets
-  # vpc:
-  #   securityGroupIds:
-  #     - ${env:VPC_SECURITY_GROUP}
-  #   subnetIds:
-  #     [
-  #       "${env:VPC_SUBNET_1}",
-  #       "${env:VPC_SUBNET_2}",
-  #       "${env:VPC_SUBNET_3}",
-  #       "${env:VPC_SUBNET_4}",
-  #       "${env:VPC_SUBNET_5}",
-  #       "${env:VPC_SUBNET_5}",
-  #     ]
   environment:
     # APP
     PORT: ${env:PORT}
