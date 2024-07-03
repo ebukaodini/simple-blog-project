@@ -4,6 +4,16 @@
     "title": "Simple Blog Project",
     "version": "1.0.0"
   },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "Local server"
+    },
+    {
+      "url": "https://5cy2xk8qpg.execute-api.us-east-1.amazonaws.com/production",
+      "description": "Production server"
+    }
+  ],
   "components": {
     "securitySchemes": {
       "bearerAuth": {
