@@ -99,10 +99,10 @@ export class UserRepo {
     try {
       return await this.createSchema().then(async () => {
         return await DatabaseService.execute({
-          sql: `DELETE FROM users WHERE id = :userId;`,
+          sql: `DELETE FROM users WHERE id = :userId LIMIT 1;`,
           values: { userId },
         }).then((result: ResultSetHeader) => {
-          return result.affectedRows > 1;
+          return result.affectedRows > 0;
         });
       });
     } catch (error: any) {

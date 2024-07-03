@@ -30,13 +30,11 @@ export const handler = MiddlewareService.use(
             user: result.id,
           });
 
-          // const { id, firstname, lastname, email, created_at } = result;
           return response.success("Login successful!", {
             token,
-            // user: { id, firstname, lastname, email, created_at },
           });
         } else {
-          return response.success("Invalid email / password!");
+          return response.error("Invalid email / password!");
         }
       });
     } catch (error: any) {

@@ -37,7 +37,6 @@ provider:
     disableDefaultEndpoint: true
 
 plugins:
-  # - serverless-auto-swagger
   - serverless-plugin-typescript
   - serverless-dotenv-plugin
   - serverless-offline
@@ -102,3 +101,17 @@ functions:
       - http:
           path: /api/v1/posts/{postId}
           method: delete
+
+  # doc
+  swagger:
+    handler: src/handlers/docs/swagger.handler
+    events:
+      - http:
+          path: /api/v1/docs
+          method: get
+  swaggerJson:
+    handler: src/handlers/docs/swagger.handlerJson
+    events:
+      - http:
+          path: /api/v1/docs.json
+          method: get

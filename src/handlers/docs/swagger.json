@@ -1,0 +1,412 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Simple Blog Project",
+    "version": "1.0.0"
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ],
+  "tags": [
+    {
+      "name": "Auth"
+    },
+    {
+      "name": "User"
+    },
+    {
+      "name": "Post"
+    }
+  ],
+  "paths": {
+    "/api/v1/sign-up": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Sign Up",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "firstname": "Ebuka",
+                  "lastname": "Odini",
+                  "email": "ebukaodini@gmail.com",
+                  "password": "12345"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "message": "User created successfully!",
+                  "data": {
+                    "id": 1,
+                    "firstname": "Ebuka",
+                    "lastname": "Odini",
+                    "email": "ebukaodini@gmail.com"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "message": "User was not created. Email already exists!"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "message": "Validation failed",
+                  "errors": {
+                    "firstname": "Firstname is required",
+                    "lastname": "Lastname is required",
+                    "email": "Name is required",
+                    "password": "Password is required"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auth/sign-in": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Sign In",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "email": "ebukaodini@gmail.com",
+                  "password": "12345"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "message": "Login successful!",
+                  "data": {
+                    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoxLCJpYXQiOjE3MTk5NTY3ODQsImV4cCI6MTcyMDU2MTU4NH0.qTC6gphvyT4O2K3ktj5FhKPDR1FkCuwg3XPr9uPkPt8"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "message": "Invalid email / password!"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "message": "Validation failed",
+                  "errors": {
+                    "email": "Name is required",
+                    "password": "Password is required"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/users/profile": {
+      "get": {
+        "tags": ["User"],
+        "summary": "Get Profile",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "message": "User profile.",
+                  "data": {
+                    "id": 1,
+                    "firstname": "Ebuka",
+                    "lastname": "Odini",
+                    "email": "ebukaodini@gmail.com",
+                    "created_at": "2024-07-02T21:44:53.000Z"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": ["User"],
+        "summary": "Update Profile",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "firstname": "Ebuka",
+                  "lastname": "Odini"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "message": "User profile updated!",
+                  "data": {
+                    "id": 1,
+                    "firstname": "Ebuka",
+                    "lastname": "Odini",
+                    "email": "ebukaodini@gmail.com",
+                    "created_at": "2024-07-02T21:44:53.000Z"
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "message": "Validation failed",
+                  "errors": {
+                    "firstname": "Firstname is required",
+                    "lastname": "Lastname is required"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["User"],
+        "summary": "Delete Profile",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "message": "User profile deleted."
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "message": "User profile not deleted!"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/posts": {
+      "post": {
+        "tags": ["Post"],
+        "summary": "Create a Post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "title": "Hello World",
+                  "content": "Welcome to my micro-blog"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "message": "Post created.",
+                  "data": {
+                    "id": 1,
+                    "title": "Hello World",
+                    "content": "Welcome to my micro-blog"
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "message": "Validation failed",
+                  "errors": {
+                    "title": "Title is required",
+                    "content": "Content is required"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["Post"],
+        "summary": "Get my Posts",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "message": "My posts.",
+                  "data": [
+                    {
+                      "id": 1,
+                      "user_id": 1,
+                      "title": "Hello World",
+                      "content": "Welcome to my micro-blog",
+                      "created_at": "2024-07-02T21:50:06.000Z",
+                      "created_by": {
+                        "firstname": "Ebuka",
+                        "lastname": "Odini"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/posts/1": {
+      "delete": {
+        "tags": ["Post"],
+        "summary": "Delete my Post",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "message": "Post deleted."
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "message": "Post not deleted!"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
