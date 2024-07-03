@@ -5,7 +5,6 @@ import { HttpStatusCode } from "axios";
 
 export const validator = (Dto: any, group: string) => {
   return async (event: APIGatewayProxyEvent, context: Context, next: any) => {
-    console.log("validator", event, context);
     try {
       if (!event.body) {
         return response.error(

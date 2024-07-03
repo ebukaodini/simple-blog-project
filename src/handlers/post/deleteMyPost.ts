@@ -12,8 +12,10 @@ export const handler = MiddlewareService.use(
   [authenticate()],
   async (
     event: APIGatewayProxyEvent,
-    _context: Context
+    context: Context
   ): Promise<APIGatewayProxyResult> => {
+    context.callbackWaitsForEmptyEventLoop = false;
+
     try {
       const postId = Number(event.pathParameters.postId!);
       const result = await PostRepo.delete(postId);

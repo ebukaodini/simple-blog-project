@@ -30,7 +30,6 @@ export class UserDto {
   created_at?: Date;
 
   public static fromJson(data: { [key: string]: any }): UserDto {
-    console.log("fromJSon", data);
     const user: UserDto = new UserDto();
 
     if (data?.id) user.id = data.id;

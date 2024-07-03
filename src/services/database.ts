@@ -36,7 +36,7 @@ export class DatabaseService {
   ): Promise<Query | QueryResult> {
     return new Promise(async (resolve, reject) => {
       await this.connect();
-      const poolConnection = this.pool.getConnection((err, connection) => {
+      this.pool.getConnection((err, connection) => {
         if (err) {
           reject(err);
           return;

@@ -15,6 +15,8 @@ export const handler = MiddlewareService.use(
     event: APIGatewayProxyEvent,
     context: Context
   ): Promise<APIGatewayProxyResult> => {
+    context.callbackWaitsForEmptyEventLoop = false;
+
     try {
       const userId = context.clientContext.Custom.userId;
 

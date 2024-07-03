@@ -7,7 +7,6 @@ export const response = {
     data?: any,
     statusCode?: number
   ): APIGatewayProxyResult => {
-    console.log("success", message, data, statusCode);
     return {
       statusCode: statusCode ?? HttpStatusCode.Ok,
       body: JSON.stringify({ message, data }),
@@ -19,7 +18,6 @@ export const response = {
     errors?: any | AxiosError,
     statusCode?: number
   ): APIGatewayProxyResult => {
-    console.log("error", message, errors, statusCode);
     if (errors?.response) {
       // Axios Error
       console.log("Axios Error", errors?.response);

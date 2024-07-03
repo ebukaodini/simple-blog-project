@@ -14,8 +14,10 @@ export const handler = MiddlewareService.use(
   [validator(UserDto, "create")],
   async (
     event: APIGatewayProxyEvent,
-    _context: Context
+    context: Context
   ): Promise<APIGatewayProxyResult> => {
+    context.callbackWaitsForEmptyEventLoop = false;
+
     try {
       const data = UserDto.fromJson(JSON.parse(event.body!));
 

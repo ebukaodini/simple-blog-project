@@ -8,8 +8,10 @@ import path from "path";
 
 export const handlerJson = async (
   _event: APIGatewayProxyEvent,
-  _context: Context
+  context: Context
 ): Promise<APIGatewayProxyResult> => {
+  context.callbackWaitsForEmptyEventLoop = false;
+
   const swaggerFilePath = path.join(__dirname, "swagger.json");
   const swaggerContent = fs.readFileSync(swaggerFilePath, "utf-8");
 
@@ -24,8 +26,10 @@ export const handlerJson = async (
 
 export const handler = async (
   _event: APIGatewayProxyEvent,
-  _context: Context
+  context: Context
 ): Promise<APIGatewayProxyResult> => {
+  context.callbackWaitsForEmptyEventLoop = false;
+
   const swaggerUI = `
         <!DOCTYPE html>
         <html lang="en">
